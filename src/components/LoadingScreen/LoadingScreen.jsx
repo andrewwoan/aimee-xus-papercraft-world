@@ -62,7 +62,8 @@ const LoadingScreen = () => {
     });
   }, [revealed]);
 
-  const isLoaded = maxProgress === 100;
+  // Assets finished downloading AND the scene has mounted/compiled
+  const isLoaded = maxProgress === 100 && isSceneReady;
 
   if (gone) return null;
 
@@ -154,48 +155,26 @@ const LoadingScreen = () => {
               className="credits-link"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                position: "absolute",
-                left: "50%",
-                bottom: "15%",
-                transform: "translate(-50%, -50%)",
-                fontSize: "14px",
-                color: "rgb(233, 233, 233)",
-                textDecoration: "underline",
-              }}
             >
               See full list of credits here!!
             </a>
 
-            <div
-              className="instructions"
-              style={{
-                position: "absolute",
-                left: "50%",
-                bottom: "250px",
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                transform: "translate(-50%, -50%)",
-                fontSize: "16px",
-                color: "rgb(233, 233, 233)",
-              }}
-            >
-              ~ Swipe/Scroll to navigate ~
+            <div className="loading-below">
+              <div className="instructions">~ Swipe/Scroll to navigate ~</div>
+              <div className="enter-slot">
+                {isLoaded && (
+                  <button
+                    className="enter-button"
+                    onClick={() => setRevealed(true)}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                  >
+                    Enter!
+                  </button>
+                )}
+              </div>
             </div>
           </>
-        )}
-
-        {isLoaded && !revealed && (
-          <button
-            className="enter-button"
-            onClick={() => setRevealed(true)}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            Enter!
-          </button>
         )}
       </div>
 

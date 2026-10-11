@@ -3,7 +3,7 @@
   inset: 0;
   width: 100vw;
   height: 100vh;
-  /* overflow: hidden; */
+  height: 100dvh;
   z-index: 99999999999999;
 }
 
@@ -59,52 +59,78 @@
 
 .title {
   position: absolute;
-  top: 39%;
+  bottom: calc(50% + 48px);
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   z-index: 10;
+  margin: 0;
+  padding: 0 16px;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: center;
   font-family: "Slime Box";
-  background-color: transparent;
-  outline: none;
-  border: none;
   color: rgb(230, 230, 230);
-  font-size: 48px;
+  font-size: clamp(28px, 6vw, 48px);
+}
+
+/* Everything under the seam flows in a column so nothing can overlap */
+.loading-below {
+  position: absolute;
+  top: calc(50% + 48px);
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgb(233, 233, 233);
+}
+
+.instructions {
+  font-size: clamp(13px, 2.5vw, 16px);
+  text-align: center;
+}
+
+.enter-slot {
+  min-height: 62px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
 }
 
-@media (max-width: 764px) {
-  .title {
-    font-size: 30px;
-  }
+.credits-link {
+  position: absolute;
+  left: 50%;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 14px;
+  color: rgb(233, 233, 233);
+  text-decoration: underline;
+  white-space: nowrap;
 }
 
 .enter-button {
-  position: absolute;
-  top: 57%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 10;
   font-family: "Slime Box";
   background-color: transparent;
   outline: none;
-  border: none;
+  border: 3px dashed transparent;
+  border-radius: 12px;
   color: rgb(230, 230, 230);
   font-size: 28px;
-  padding: 12px 24px;
+  padding: 9px 24px;
 }
 
 .enter-button:hover {
   cursor: pointer;
-  border-radius: 12px;
-  border: 3px dashed white;
+  border-color: white;
 }
 
 .loading-bar-container {
   position: absolute;
-  top: 48.9%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
